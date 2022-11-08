@@ -11,13 +11,13 @@ p{
     margin-right: 5px;
     margin-left: 5px;
 }
-#1:nth-of-type(1){
+h3:nth-of-type(1){
     background-color:khaki;
 }
-#2:nth-of-type(2){
+h3:nth-of-type(2){
     background-color:darkseagreen;
 }
-#3:nth-of-type(3){
+h3:nth-of-type(3){
     background-color:salmon;
 }
 h3{
