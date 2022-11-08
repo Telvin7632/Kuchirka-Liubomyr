@@ -37,9 +37,10 @@ h3{
 }
 /* Large devices */ 
 @media (min-width: 993px) { 
-    .col-lg-1; 
-        
-        } 
+    .col-lg-1{
+        box-sizing: border-box;
+        margin: 20px;
+    }
     article{
         float:left
     }
