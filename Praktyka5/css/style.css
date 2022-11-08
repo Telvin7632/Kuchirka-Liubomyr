@@ -33,7 +33,7 @@ h3{
     margin-left: auto;
 }
 .row{
-    width: 85%;
+    width: 100%;
 }
 /* Large devices */ 
 @media (min-width: 993px) { 
@@ -44,7 +44,7 @@ h3{
     article{
         float:left
     }
-    .col-lg-1{ 
-        width: 30%;
+    .col-lg-3{ 
+        width: 33.33%;
     } 
 }
