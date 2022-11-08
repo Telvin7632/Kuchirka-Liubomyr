@@ -11,14 +11,6 @@ p{
     margin-right: 5px;
     margin-left: 5px;
 }
-h3{
-    text-align: center;
-    border: 2px solid black;
-    padding: 5px;
-    margin-top: 0px;
-    width: 100px;
-    margin-left: auto;
-}
 h3:nth-of-type(1){
     background-color:khaki;
 }
@@ -27,4 +19,12 @@ h3:nth-of-type(2){
 }
 h3:nth-of-type(3){
     background-color:salmon;
+}
+h3{
+    text-align: center;
+    border: 2px solid black;
+    padding: 5px;
+    margin-top: 0px;
+    width: 100px;
+    margin-left: auto;
 }
