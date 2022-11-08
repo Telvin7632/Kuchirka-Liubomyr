@@ -14,13 +14,13 @@ p{
     margin-right: 5px;
     margin-left: 5px;
 }
-article h3:nth-of-type(3){
+article:nth-of-type(1) h3{
     background-color:darkseagreen;
 }
-article h3:nth-of-type(2){
+article:nth-of-type(2) h3{
     background-color:antiquewhite;
 }
-article h3:nth-of-type(1){
+article:nth-of-type(3) h3{
     background-color:salmon;
 }
 h3{
