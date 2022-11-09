@@ -59,5 +59,8 @@ h3{
     .col-md-12{
         float: left;
         width: 100%;
+        .blm{
+            width: 95%;
+        }
     }
 }
