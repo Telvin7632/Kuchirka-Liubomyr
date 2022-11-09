@@ -38,6 +38,9 @@ h3{
 .row{
     width: 100%;
 }
+.bl{
+    width: 90%;
+}
 /* Large devices */ 
 @media (min-width: 993px) { 
     .col-lg-3{
