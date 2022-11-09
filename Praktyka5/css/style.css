@@ -39,7 +39,9 @@ h3{
     width: 100%;
 }
 .bl{
-    width: 100%;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }
 /* Large devices */ 
 @media (min-width: 993px) { 
