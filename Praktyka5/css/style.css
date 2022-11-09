@@ -42,7 +42,6 @@ h3{
 @media (min-width: 993px) { 
     .col-lg-3{
         float: left;
-        margin: 20px;
-        width: 33.33%
+        width: 33.33%;
     }
 }
