@@ -34,9 +34,11 @@ h3{
 }
 .row{
     width: 100%;
+    height: 100%;
 }
 .bl{
     width: 90%;
+    height: 90%;
     margin-left: auto;
     margin-right: auto;
 }
