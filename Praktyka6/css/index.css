@@ -19,6 +19,7 @@
     }
     div{
       display: flex;
+      flex-wrap: wrap;
     }
     /* Large devices */ 
 @media (min-width: 992px) { 
@@ -32,5 +33,7 @@
 @media (min-width: 768px) and (max-width: 991px) {
 .col-md-6 {
   width: 50%;
+  flex-direction: row;
+  text-align: center;
   }
 }
