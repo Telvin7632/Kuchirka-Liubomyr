@@ -67,7 +67,7 @@
     }
     div div{
       display: flex;
-      align-items: stretch;
+      flex-wrap: wrap;
     }
         /* Large devices */ 
 @media (min-width: 992px) { 
