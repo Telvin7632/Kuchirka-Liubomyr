@@ -1,0 +1,16 @@
+    #l1:link{color: blue;}
+    #l1:visited{color:chartreuse;}
+    #l2:link{color:gray;}
+    #l2:visited{color:darkorange;}
+    #l3:link{color:darkorchid;}
+    #l3:visited{color:black;}
+    #l4:link{color:red;}
+    #l4:visited{color:royalblue;}
+
+    h1{
+      text-align: center;
+      font-size: 24px;
+    }
+    #H{
+        font-size: 120%;
+    }
