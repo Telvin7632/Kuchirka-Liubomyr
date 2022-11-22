@@ -60,6 +60,6 @@
     #up{
       text-transform: uppercase;
     }
-    div{
+    div:nth-of-type(1){
       display: flex;
     }
