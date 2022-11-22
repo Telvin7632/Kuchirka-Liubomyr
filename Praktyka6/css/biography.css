@@ -51,7 +51,7 @@
     article{
       font-size: 120%;
       border: 1px solid black;
-      display: flex;
+      display:flexbox;
     }
     article h2{
       font-size: 120%;
