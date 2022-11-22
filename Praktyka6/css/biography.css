@@ -62,7 +62,7 @@
       text-transform: uppercase;
     }
     #flexx{
-      display: flexbox;
+      display: flex;
       flex-wrap: wrap;
     }
         /* Large devices */ 
