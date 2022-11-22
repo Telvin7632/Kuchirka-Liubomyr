@@ -50,6 +50,7 @@
     }
     article{
       font-size: 120%;
+      border: 1px solid black;
     }
     article h2{
       font-size: 120%;
@@ -63,4 +64,30 @@
     #flexx{
       display: flex;
     }
+        /* Large devices */ 
+@media (min-width: 992px) { 
+  .col-lg-4 {
+    width: 33.33%;
+
+    }
+  .col-lg-6 {
+    width: 50%
+  }
+    
+  
+  }
+  /* Medium devices */
+  @media (min-width: 768px) and (max-width: 991px) {
+  .col-md-6 {
+    width: 50%;
+
+    }
+  }
+  /* Small devices */
+  @media (max-width: 767px){
+    .col-sm-12 {
+      width: 100%;
+
+    }
+  }
 
