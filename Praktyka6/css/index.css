@@ -17,6 +17,9 @@
     #H{
         font-size: 120%;
     }
+    div{
+      display: flex;
+    }
     /* Large devices */ 
 @media (min-width: 992px) { 
 .col-lg-3 {
