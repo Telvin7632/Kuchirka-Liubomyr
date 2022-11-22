@@ -63,6 +63,9 @@
     #flexx{
       display: flex;
     }
+    div p{
+      flex: 0;
+    }
     div article{
       align-items: stretch;
     }
