@@ -65,6 +65,9 @@
       display: flex;
       flex-wrap: wrap;
     }
+    div div{
+      flex: 1;
+    }
         /* Large devices */ 
 @media (min-width: 992px) { 
   .col-lg-4 {
