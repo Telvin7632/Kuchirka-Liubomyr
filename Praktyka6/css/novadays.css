@@ -35,3 +35,8 @@
         width: 50%;
         }
       }
+    @media (max-width: 991px) { 
+      .col-md-12 {
+        width: 100%;
+        }
+      }
