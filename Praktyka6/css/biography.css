@@ -60,3 +60,6 @@
     #up{
       text-transform: uppercase;
     }
+    div{
+      display: flex;
+    }
