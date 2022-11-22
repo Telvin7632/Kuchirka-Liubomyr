@@ -63,3 +63,6 @@
     #flexx{
       display: flex;
     }
+    div article{
+      flex: 100px;
+    }
