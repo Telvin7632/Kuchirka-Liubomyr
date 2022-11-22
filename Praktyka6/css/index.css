@@ -17,3 +17,9 @@
     #H{
         font-size: 120%;
     }
+    /* Large devices */ 
+@media (min-width: 992px) { 
+p a{
+  display: flex;
+}
+}
