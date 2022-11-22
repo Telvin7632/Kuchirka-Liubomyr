@@ -17,6 +17,9 @@
     #H{
         font-size: 120%;
     }
+    a{
+      text-align: center;
+    }
     div{
       display: flex;
     }
