@@ -63,6 +63,7 @@
     }
     #flexx{
       display: flex;
+      flex-wrap: wrap;
     }
         /* Large devices */ 
 @media (min-width: 992px) { 
