@@ -64,5 +64,5 @@
       display: flex;
     }
     div article{
-      flex: 100px;
+      align-items: stretch;
     }
