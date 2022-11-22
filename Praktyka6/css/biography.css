@@ -57,6 +57,7 @@
     }
     .ret{
       font-weight: 600;
+      flex: 1;
     }
     #up{
       text-transform: uppercase;
