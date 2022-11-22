@@ -49,9 +49,3 @@ width: 50%;
 width: 100%;
 }
 }
-/* Small devices */
-@media (max-width: 767px){
-  .col-sm-12 {
-
-  }
-}
