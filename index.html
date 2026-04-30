@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Виробнича практика 2026 — Кучірка Л.І.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Fira+Sans:wght@300;400;500&family=Fira+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0f1f3d;
+    --blue: #1a4480;
+    --accent: #e8a020;
+    --light: #f5f7fa;
+    --white: #ffffff;
+    --text: #1e2a3a;
+    --muted: #6b7a8d;
+    --border: #d0dbe8;
+    --code-bg: #1a2744;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Fira Sans', sans-serif;
+    background: var(--light);
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 2.5rem;
+    height: 56px;
+    border-bottom: 3px solid var(--accent);
+  }
+  nav .brand {
+    color: var(--white);
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+  }
+  nav .brand span { color: var(--accent); }
+  nav ul {
+    list-style: none;
+    display: flex; gap: 0.2rem;
+  }
+  nav ul a {
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.75rem;
+    border-radius: 3px;
+    transition: all 0.2s;
+  }
+  nav ul a:hover { color: var(--accent); background: rgba(232,160,32,0.1); }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--blue) 60%, #1e5a9c 100%);
+    color: var(--white);
+    padding: 5rem 2.5rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 40px,
+      rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 41px
+    );
+  }
+  .hero::after {
+    content: '';
+    position: absolute; bottom: -2px; left: 0; right: 0;
+    height: 60px;
+    background: var(--light);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+  .hero-inner {
+    max-width: 900px; margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: var(--navy);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.9rem;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    line-height: 1.15;
+    font-weight: 900;
+    margin-bottom: 1rem;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--accent);
+  }
+  .hero p {
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.75);
+    max-width: 580px;
+    font-weight: 300;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 4rem 2.5rem; }
+  section:nth-child(even) { background: var(--white); }
+
+  .section-inner { max-width: 900px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+    color: var(--navy);
+    margin-bottom: 2.5rem;
+    line-height: 1.2;
+  }
+
+  /* ── INFO CARDS ── */
+  .info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .info-card {
+    background: var(--white);
+    padding: 1.5rem 1.75rem;
+  }
+  section:nth-child(even) .info-card { background: var(--light); }
+  .info-card .ic-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+  }
+  .info-card .ic-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.5;
+  }
+
+  /* ── TEAM ── */
+  .team-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+  .team-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    background: var(--white);
+    position: relative;
+  }
+  .team-card.me {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, #fffbf0, #fff8e6);
+  }
+  .team-card.me::after {
+    content: 'Автор';
+    position: absolute; top: 0.75rem; right: 0.75rem;
+    background: var(--accent); color: var(--navy);
+    font-size: 0.6rem; font-weight: 700;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 0.15rem 0.5rem; border-radius: 2px;
+  }
+  .team-card .tc-name { font-weight: 600; font-size: 0.95rem; margin-bottom: 0.3rem; }
+  .team-card .tc-role {
+    font-size: 0.8rem; color: var(--muted);
+    font-family: 'Fira Mono', monospace;
+    line-height: 1.5;
+  }
+
+  /* ── TASK SECTIONS ── */
+  .task-block {
+    border-left: 3px solid var(--blue);
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  .task-block h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+  }
+  .task-block p { color: var(--text); font-size: 0.95rem; }
+
+  /* ── TECH STACK ── */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+  .stack-card {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    background: var(--white);
+  }
+  section:nth-child(even) .stack-card { background: var(--light); }
+  .stack-card .sc-cat {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em;
+    text-transform: uppercase; color: var(--blue); margin-bottom: 0.5rem;
+  }
+  .stack-card .sc-tech {
+    display: flex; flex-wrap: wrap; gap: 0.4rem;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--navy);
+    color: var(--white);
+    font-family: 'Fira Mono', monospace;
+    font-size: 0.72rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    font-weight: 500;
+  }
+
+  /* ── ALGO TIMELINE ── */
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0.4rem; top: 0; bottom: 0;
+    width: 2px; background: var(--border);
+  }
+  .tl-item { position: relative; margin-bottom: 1.5rem; }
+  .tl-item::before {
+    content: '';
+    position: absolute; left: -1.65rem; top: 0.35rem;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--white);
+    box-shadow: 0 0 0 2px var(--accent);
+  }
+  .tl-item h4 { font-weight: 600; font-size: 0.95rem; color: var(--navy); margin-bottom: 0.25rem; }
+  .tl-item p { font-size: 0.88rem; color: var(--muted); }
+
+  /* ── CODE BLOCK ── */
+  .code-block {
+    background: var(--code-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    overflow-x: auto;
+  }
+  .code-block pre {
+    font-family: 'Fira Mono', monospace;
+    font-size: 0.82rem;
+    color: #cdd8ea;
+    line-height: 1.7;
+    white-space: pre;
+  }
+  .code-block .kw { color: #79b8ff; }
+  .code-block .fn { color: #b392f0; }
+  .code-block .str { color: #9ecbff; }
+  .code-block .cm { color: #6a737d; }
+
+  /* ── SCREENSHOTS ── */
+  .screens-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+  .screen-placeholder {
+    border: 2px dashed var(--border);
+    border-radius: 8px;
+    aspect-ratio: 16/10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background: var(--white);
+    color: var(--muted);
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 1rem;
+    transition: border-color 0.2s;
+  }
+  .screen-placeholder:hover { border-color: var(--blue); }
+  .screen-placeholder svg { opacity: 0.4; }
+  .screen-placeholder .sp-label { font-weight: 600; color: var(--text); font-size: 0.9rem; }
+
+  /* ── RESULTS / SCIENCE ── */
+  .result-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .result-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    padding: 1rem 1.25rem;
+    background: var(--white);
+    border-radius: 8px;
+    border: 1px solid var(--border);
+  }
+  section:nth-child(even) .result-item { background: var(--light); }
+  .result-num {
+    flex-shrink: 0;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    background: var(--navy);
+    color: var(--white);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 700;
+    font-family: 'Fira Mono', monospace;
+  }
+  .result-text { font-size: 0.92rem; }
+
+  /* ── TABLE ── */
+  .table-wrap { overflow-x: auto; border-radius: 8px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; }
+  thead { background: var(--navy); color: var(--white); }
+  thead th { padding: 0.85rem 1rem; text-align: left; font-weight: 500; font-size: 0.8rem; letter-spacing: 0.04em; }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(26,68,128,0.04); }
+  tbody td { padding: 0.7rem 1rem; vertical-align: top; color: var(--text); }
+  td.week { font-family: 'Fira Mono', monospace; font-size: 0.8rem; color: var(--blue); white-space: nowrap; }
+
+  /* ── FLOWCHART (SVG схема) ── */
+  .schema-wrap {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--white);
+  }
+
+  /* ── MISC ── */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  @media (max-width: 640px) { .two-col { grid-template-columns: 1fr; } }
+
+  .about-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+  section:nth-child(even) .about-card { background: var(--light); }
+  .about-card .avatar {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: var(--navy);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 1rem;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem; color: var(--accent); font-weight: 900;
+  }
+  .about-card h3 { font-weight: 700; margin-bottom: 0.25rem; }
+  .about-card p { font-size: 0.85rem; color: var(--muted); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+  }
+  footer strong { color: var(--accent); }
+
+  /* ── ANIMATION ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-inner > * {
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-inner > *:nth-child(1) { animation-delay: 0.1s; }
+  .hero-inner > *:nth-child(2) { animation-delay: 0.25s; }
+  .hero-inner > *:nth-child(3) { animation-delay: 0.4s; }
+  .hero-inner > *:nth-child(4) { animation-delay: 0.55s; }
+
+  /* flash animation block */
+  .flash-box {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--white);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 120px;
+  }
+  .flash-anim {
+    display: flex;
+    gap: 6px;
+    align-items: flex-end;
+  }
+  .flash-anim .bar {
+    width: 18px;
+    border-radius: 3px 3px 0 0;
+    background: var(--blue);
+    animation: barPulse 1.4s ease-in-out infinite;
+  }
+  .flash-anim .bar:nth-child(1) { height: 30px; animation-delay: 0s; }
+  .flash-anim .bar:nth-child(2) { height: 50px; animation-delay: 0.1s; }
+  .flash-anim .bar:nth-child(3) { height: 70px; animation-delay: 0.2s; }
+  .flash-anim .bar:nth-child(4) { height: 45px; animation-delay: 0.3s; }
+  .flash-anim .bar:nth-child(5) { height: 60px; animation-delay: 0.4s; }
+  .flash-anim .bar:nth-child(6) { height: 35px; animation-delay: 0.5s; }
+  .flash-anim .bar:nth-child(7) { height: 55px; animation-delay: 0.6s; }
+  .flash-anim .bar:nth-child(8) { height: 40px; animation-delay: 0.7s; }
+  @keyframes barPulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+    50%       { opacity: 1;   transform: scaleY(1); }
+  }
+  .flash-label { margin-left: 2rem; font-size: 0.9rem; color: var(--muted); }
+  .flash-label strong { display: block; color: var(--navy); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="brand">Практика <span>2026</span></div>
+  <ul>
+    <li><a href="#about">Про практику</a></li>
+    <li><a href="#task">Завдання</a></li>
+    <li><a href="#science">Наука</a></li>
+    <li><a href="#misc">Різне</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div class="hero-tag">Звіт виробничої практики · 2026</div>
+    <h1>Alumni Database —<br><em>Система обліку випускників</em></h1>
+    <p>КНУ імені Василя Стефаника · Факультет математики та інформатики · Група КН-42 · 16.03–24.04.2026</p>
+    <p style="margin-top:0.75rem;font-size:0.85rem;color:rgba(255,255,255,0.5);">Кучірка Л.І. &nbsp;·&nbsp; Спеціальність 122 «Комп'ютерні науки»</p>
+  </div>
+</header>
+
+<!-- SECTION 1: ПРО ПРАКТИКУ -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label">Розділ 1</div>
+    <h2 class="section-title">Про практику</h2>
+
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="ic-label">Термін</div>
+        <div class="ic-value">16 березня – 24 квітня 2026 р.<br><small style="color:var(--muted)">6 тижнів</small></div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Виробнича база</div>
+        <div class="ic-value">Деканат факультету математики та інформатики КНУ ім. Василя Стефаника<br><small style="color:var(--muted)">76025, м. Івано-Франківськ, вул. Шевченка 57, ауд. 317</small></div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Робоче місце</div>
+        <div class="ic-value">Інженер-програміст</div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Керівник від бази</div>
+        <div class="ic-value">Соломко Андрій Васильович<br><small style="color:var(--muted)">Заступник декана з навчально-методичної роботи</small></div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Керівник від кафедри</div>
+        <div class="ic-value">Превисокова Наталія Володимирівна<br><small style="color:var(--muted)">доцент</small></div>
+      </div>
+      <div class="info-card">
+        <div class="ic-label">Керівник від факультету</div>
+        <div class="ic-value">Семаньків М.В.<br><small style="color:var(--muted)">доцент</small></div>
+      </div>
+    </div>
+
+    <h3 style="margin:2.5rem 0 1rem;font-family:'Playfair Display',serif;color:var(--navy);">Склад групи</h3>
+    <div class="team-grid">
+      <div class="team-card me">
+        <div class="tc-name">Кучірка Любомир Іванович</div>
+        <div class="tc-role">Роль 4: Frontend Logic &<br>Reporting Developer</div>
+      </div>
+      <div class="team-card">
+        <div class="tc-name">Горайчук М.О.</div>
+        <div class="tc-role">Роль 3: UI/UX Frontend Developer</div>
+      </div>
+      <div class="team-card">
+        <div class="tc-name">Диндин Б.В.</div>
+        <div class="tc-role">Роль 2: Data Engineer</div>
+      </div>
+      <div class="team-card">
+        <div class="tc-name">Тарас А.І.</div>
+        <div class="tc-role">Роль 1: Backend Developer</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: ІНДИВІДУАЛЬНЕ ЗАВДАННЯ -->
+<section id="task">
+  <div class="section-inner">
+    <div class="section-label">Розділ 2</div>
+    <h2 class="section-title">Індивідуальне завдання</h2>
+
+    <!-- 2.1 Тема і мета -->
+    <div class="task-block">
+      <h3>2.1 Тема, цілі та опис застосування</h3>
+      <p>
+        <strong>Alumni Database</strong> — сучасний веб-архів для завантаження, пошуку, фільтрації та
+        експорту даних про студентів і випускників університету. Оптимізований для роботи з
+        масовими вивантаженнями з ЄДЕБО у форматах Excel та CSV.
+      </p>
+      <br>
+      <p><strong>Моя роль (Роль 4):</strong> Frontend Logic & Reporting Developer — реалізація управління
+        станом, підключення до бекенд-API, модуль сортування з урахуванням українського алфавіту,
+        пагінація по 50 записів, генерація CSV та PDF звітів.</p>
+    </div>
+
+    <!-- 2.2 Стек -->
+    <div class="task-block">
+      <h3>2.2 Мови програмування, засоби та технічні вимоги</h3>
+      <div class="stack-grid" style="margin-top:1rem;">
+        <div class="stack-card">
+          <div class="sc-cat">Frontend</div>
+          <div class="sc-tech">
+            <span class="badge">React</span>
+            <span class="badge">Vite</span>
+            <span class="badge">CSS</span>
+            <span class="badge">pdfMake</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="sc-cat">Backend</div>
+          <div class="sc-tech">
+            <span class="badge">Node.js</span>
+            <span class="badge">Express.js</span>
+            <span class="badge">SQLite</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="sc-cat">React Hooks (моя зона)</div>
+          <div class="sc-tech">
+            <span class="badge">useState</span>
+            <span class="badge">useMemo</span>
+            <span class="badge">useEffect</span>
+            <span class="badge">fetch API</span>
+          </div>
+        </div>
+        <div class="stack-card">
+          <div class="sc-cat">Парсинг / Кодування</div>
+          <div class="sc-tech">
+            <span class="badge">xlsx</span>
+            <span class="badge">iconv-lite</span>
+            <span class="badge">localeCompare</span>
+            <span class="badge">BOM &#92;uFEFF</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.3 Алгоритм -->
+    <div class="task-block">
+      <h3>2.3 Алгоритм роботи модуля</h3>
+      <div class="timeline" style="margin-top:1rem;">
+        <div class="tl-item">
+          <h4>Управління станом (App.jsx)</h4>
+          <p>Хуки <code>useState</code> для фільтрів та результатів. Зміна фільтру → оновлення стану → рендер FilterSection.</p>
+        </div>
+        <div class="tl-item">
+          <h4>Пошук через API (handleSearch)</h4>
+          <p>Формування URLSearchParams → <code>fetch('/api/alumni?...')</code> → запис результатів у стан.</p>
+        </div>
+        <div class="tl-item">
+          <h4>Локальне сортування</h4>
+          <p>Клієнтське сортування з урахуванням українського алфавіту:<br>
+            <code>arr.sort((a,b) => a.fullName.localeCompare(b.fullName, 'uk'))</code></p>
+        </div>
+        <div class="tl-item">
+          <h4>Мемоізація (useMemo)</h4>
+          <p>Відсортований масив та параметри пагінації обчислюються лише при зміні вхідних даних, без зайвих рендерів.</p>
+        </div>
+        <div class="tl-item">
+          <h4>Пагінація</h4>
+          <p>50 записів на сторінку. <code>startIndex = (page−1)×50</code>, <code>totalPages = ceil(n/50)</code>.</p>
+        </div>
+        <div class="tl-item">
+          <h4>Генерація CSV</h4>
+          <p>BOM-мітка <code>\uFEFF</code> + екранування лапок → правильне відображення кирилиці у Microsoft Excel.</p>
+        </div>
+        <div class="tl-item">
+          <h4>Генерація PDF (pdfMake)</h4>
+          <p>Ландшафтний формат. Динамічний заголовок залежно від фільтрів: «Список випускників (випуск 2024)».</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2.4 Ключовий код -->
+    <div class="task-block">
+      <h3>2.4 Ключові фрагменти коду</h3>
+      <div class="code-block">
+        <pre><span class="cm">// Управління станом і пошук</span>
+<span class="kw">const</span> [filters, setFilters] = <span class="fn">useState</span>({ name: <span class="str">''</span>, year: <span class="str">''</span>, degree: <span class="str">''</span> });
+<span class="kw">const</span> [results, setResults] = <span class="fn">useState</span>([]);
+
+<span class="kw">const</span> <span class="fn">handleSearch</span> = <span class="kw">async</span> () => {
+  <span class="kw">const</span> params = <span class="kw">new</span> <span class="fn">URLSearchParams</span>(filters);
+  <span class="kw">const</span> res = <span class="kw">await</span> <span class="fn">fetch</span>(<span class="str">`/api/alumni?${params}`</span>);
+  <span class="fn">setResults</span>(<span class="kw">await</span> res.<span class="fn">json</span>());
+};
+
+<span class="cm">// Сортування з підтримкою укр. алфавіту + мемоізація</span>
+<span class="kw">const</span> sorted = <span class="fn">useMemo</span>(() =>
+  [...results].<span class="fn">sort</span>((a, b) =>
+    a.fullName.<span class="fn">localeCompare</span>(b.fullName, <span class="str">'uk'</span>)), [results]);
+
+<span class="cm">// CSV з BOM для Excel</span>
+<span class="kw">const</span> csv = <span class="str">'\uFEFF'</span> + rows.<span class="fn">map</span>(r =>
+  r.<span class="fn">map</span>(v => <span class="str">`"${String(v).replace(/"/g, '""')}"`</span>).<span class="fn">join</span>(<span class="str">','</span>)).<span class="fn">join</span>(<span class="str">'\n'</span>);</pre>
+      </div>
+    </div>
+
+    <!-- 2.5 Апробація -->
+    <div class="task-block">
+      <h3>2.5 Апробація</h3>
+      <p>
+        Система апробована безпосередньо в умовах деканату факультету математики та інформатики.
+        За допомогою розробленого застосунку було сформовано та перевірено списки випускників
+        бакалаврів і магістрів за <strong>2016–2025 рр.</strong> (10 навчальних років).
+        Результати використано для фізичного сортування і групування особових справ студентів —
+        понад <strong>1 000+ записів</strong> оброблено без помилок. Система підтримує одночасний
+        імпорт кількох файлів Excel/CSV та миттєвий пошук у базі.
+      </p>
+    </div>
+
+    <!-- 2.6 Скріншоти -->
+    <div class="task-block">
+      <h3>2.6 Скріншоти інтерфейсу</h3>
+      <p style="margin-bottom:1rem;color:var(--muted);font-size:0.85rem;">
+        Замініть блоки нижче власними скріншотами програми.
+      </p>
+      <div class="screens-grid">
+        <div class="screen-placeholder">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          <div class="sp-label">Головний інтерфейс</div>
+          <div>Панель фільтрів + таблиця результатів</div>
+        </div>
+        <div class="screen-placeholder">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+          <div class="sp-label">Імпорт файлів</div>
+          <div>Завантаження Excel / CSV з ЄДЕБО</div>
+        </div>
+        <div class="screen-placeholder">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          <div class="sp-label">Експорт PDF/CSV</div>
+          <div>Звіт у ландшафтному форматі</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2.2 + 2.3: НАУКА -->
+<section id="science">
+  <div class="section-inner">
+    <div class="section-label">Розділ 2.2 – 2.3</div>
+    <h2 class="section-title">Участь у роботі підрозділу<br>та наукові результати</h2>
+
+    <div class="two-col">
+      <div>
+        <h3 style="font-family:'Playfair Display',serif;color:var(--navy);margin-bottom:1rem;font-size:1.2rem;">Участь у виробничій роботі</h3>
+        <div class="result-list">
+          <div class="result-item">
+            <div class="result-num">1</div>
+            <div class="result-text">Систематизація та фізичне групування особових справ студентів-випускників за 2016–2025 роки навчання (10 випусків).</div>
+          </div>
+          <div class="result-item">
+            <div class="result-num">2</div>
+            <div class="result-text">Генерація алфавітних списків бакалаврів і магістрів за кожен рік засобами системи Alumni Database.</div>
+          </div>
+          <div class="result-item">
+            <div class="result-num">3</div>
+            <div class="result-text">Передача готового програмного продукту до деканату для подальшого використання у повсякденній роботі.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <h3 style="font-family:'Playfair Display',serif;color:var(--navy);margin-bottom:1rem;font-size:1.2rem;">Наукові результати (кваліф. робота)</h3>
+        <div class="result-list">
+          <div class="result-item">
+            <div class="result-num">1</div>
+            <div class="result-text">Досліджено алгоритми мемоізації в React: порівняльний аналіз useMemo та useCallback для оптимізації великих табличних даних.</div>
+          </div>
+          <div class="result-item">
+            <div class="result-num">2</div>
+            <div class="result-text">Проаналізовано методи локалізованого сортування кирилиці в JavaScript: обмеження Unicode-порівняння та переваги Intl.Collator.</div>
+          </div>
+          <div class="result-item">
+            <div class="result-num">3</div>
+            <div class="result-text">Опрацьовано підходи до клієнтської генерації документів (pdfMake, jsPDF) без серверного рендерингу.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Схема архітектури -->
+    <h3 style="font-family:'Playfair Display',serif;color:var(--navy);margin:2.5rem 0 1rem;font-size:1.2rem;">Схема архітектури системи</h3>
+    <div class="schema-wrap">
+      <svg viewBox="0 0 860 220" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block;">
+        <rect width="860" height="220" fill="#f5f7fa"/>
+        <!-- Boxes -->
+        <!-- User -->
+        <rect x="20" y="80" width="120" height="60" rx="6" fill="#0f1f3d"/>
+        <text x="80" y="106" text-anchor="middle" fill="white" font-family="Fira Sans,sans-serif" font-size="11" font-weight="600">Користувач</text>
+        <text x="80" y="124" text-anchor="middle" fill="#e8a020" font-family="Fira Mono,monospace" font-size="9">Деканат</text>
+        <!-- Arrow -->
+        <line x1="140" y1="110" x2="175" y2="110" stroke="#1a4480" stroke-width="2" marker-end="url(#arr)"/>
+        <!-- React Frontend -->
+        <rect x="175" y="55" width="160" height="110" rx="6" fill="white" stroke="#1a4480" stroke-width="2"/>
+        <text x="255" y="80" text-anchor="middle" fill="#1a4480" font-family="Fira Sans,sans-serif" font-size="11" font-weight="700">React Frontend</text>
+        <text x="255" y="98" text-anchor="middle" fill="#6b7a8d" font-family="Fira Mono,monospace" font-size="9">useState / useMemo</text>
+        <text x="255" y="112" text-anchor="middle" fill="#6b7a8d" font-family="Fira Mono,monospace" font-size="9">handleSearch</text>
+        <text x="255" y="126" text-anchor="middle" fill="#6b7a8d" font-family="Fira Mono,monospace" font-size="9">CSV / PDF export</text>
+        <text x="255" y="148" text-anchor="middle" fill="#e8a020" font-family="Fira Mono,monospace" font-size="9">⬅ моя зона</text>
+        <!-- Arrow -->
+        <line x1="335" y1="110" x2="370" y2="110" stroke="#1a4480" stroke-width="2" marker-end="url(#arr)"/>
+        <!-- Express API -->
+        <rect x="370" y="55" width="150" height="110" rx="6" fill="white" stroke="#1a4480" stroke-width="2"/>
+        <text x="445" y="80" text-anchor="middle" fill="#1a4480" font-family="Fira Sans,sans-serif" font-size="11" font-weight="700">Express API</text>
+        <text x="445" y="98" text-anchor="middle" fill="#6b7a8d" font-family="Fira Mono,monospace" font-size="9">Node.js</text>
+        <text x="445" y="112" text-anchor="middle" fill="#6b7a8d" font-family="Fira Mono,monospace" font-size="9">alumniController.js</text>
+        <text x="445" y="126" text-anchor="middle" fill="#6b7a8d" font-family="Fira Mono,monospace" font-size="9">getAlumni / upload</text>
+        <text x="445" y="148" text-anchor="middle" fill="#6b7a8d" font-family="Fira Mono,monospace" font-size="9">iconv-lite / xlsx</text>
+        <!-- Arrow -->
+        <line x1="520" y1="110" x2="555" y2="110" stroke="#1a4480" stroke-width="2" marker-end="url(#arr)"/>
+        <!-- SQLite -->
+        <rect x="555" y="80" width="130" height="60" rx="6" fill="#0f1f3d"/>
+        <text x="620" y="106" text-anchor="middle" fill="white" font-family="Fira Sans,sans-serif" font-size="11" font-weight="600">SQLite DB</text>
+        <text x="620" y="124" text-anchor="middle" fill="#e8a020" font-family="Fira Mono,monospace" font-size="9">students table</text>
+        <!-- ЄДЕБО arrow from top -->
+        <rect x="685" y="18" width="150" height="40" rx="6" fill="#d9e8f8" stroke="#1a4480"/>
+        <text x="760" y="34" text-anchor="middle" fill="#1a4480" font-family="Fira Sans,sans-serif" font-size="10" font-weight="600">ЄДЕБО</text>
+        <text x="760" y="50" text-anchor="middle" fill="#6b7a8d" font-family="Fira Mono,monospace" font-size="9">.xlsx / .csv</text>
+        <line x1="760" y1="58" x2="445" y2="165" stroke="#1a4480" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr)"/>
+        <!-- PDF/CSV output -->
+        <rect x="685" y="162" width="150" height="40" rx="6" fill="#fff8e6" stroke="#e8a020"/>
+        <text x="760" y="178" text-anchor="middle" fill="#1a4480" font-family="Fira Sans,sans-serif" font-size="10" font-weight="600">PDF / CSV звіт</text>
+        <text x="760" y="194" text-anchor="middle" fill="#6b7a8d" font-family="Fira Mono,monospace" font-size="9">pdfMake + BOM</text>
+        <line x1="255" y1="165" x2="760" y2="162" stroke="#e8a020" stroke-width="1.5" stroke-dasharray="5,3" marker-end="url(#arr2)"/>
+        <!-- Arrow markers -->
+        <defs>
+          <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#1a4480"/>
+          </marker>
+          <marker id="arr2" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+            <path d="M0,0 L0,6 L8,3 z" fill="#e8a020"/>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 5: РІЗНЕ -->
+<section id="misc">
+  <div class="section-inner">
+    <div class="section-label">Розділ 5</div>
+    <h2 class="section-title">Різне</h2>
+
+    <!-- Про авторів -->
+    <h3 style="font-family:'Playfair Display',serif;color:var(--navy);margin-bottom:1rem;font-size:1.2rem;">Про авторів</h3>
+    <div class="team-grid" style="margin-bottom:2.5rem;">
+      <div class="about-card">
+        <div class="avatar">КЛ</div>
+        <h3>Кучірка Любомир</h3>
+        <p>Frontend Logic & Reporting<br>Група КН-42</p>
+      </div>
+      <div class="about-card">
+        <div class="avatar">ГМ</div>
+        <h3>Горайчук М.О.</h3>
+        <p>UI/UX Frontend Developer<br>Група КН-42</p>
+      </div>
+      <div class="about-card">
+        <div class="avatar">ДБ</div>
+        <h3>Диндин Б.В.</h3>
+        <p>Data Engineer<br>Група КН-42</p>
+      </div>
+      <div class="about-card">
+        <div class="avatar">ТА</div>
+        <h3>Тарас А.І.</h3>
+        <p>Backend Developer<br>Група КН-42</p>
+      </div>
+    </div>
+
+    <!-- Флешанімація -->
+    <h3 style="font-family:'Playfair Display',serif;color:var(--navy);margin-bottom:1rem;font-size:1.2rem;">Флешанімація</h3>
+    <div class="flash-box" style="margin-bottom:2.5rem;">
+      <div class="flash-anim">
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        <div class="bar"></div><div class="bar"></div><div class="bar"></div>
+        <div class="bar"></div><div class="bar"></div>
+      </div>
+      <div class="flash-label">
+        <strong>Alumni Database</strong>
+        Завантаження, фільтрація<br>та експорт даних випускників
+      </div>
+    </div>
+
+    <!-- Таблиця -->
+    <h3 style="font-family:'Playfair Display',serif;color:var(--navy);margin-bottom:1rem;font-size:1.2rem;">Таблиця: Хронологія практики</h3>
+    <div class="table-wrap" style="margin-bottom:2.5rem;">
+      <table>
+        <thead>
+          <tr>
+            <th>Тиждень</th>
+            <th>Дати</th>
+            <th>Зміст роботи</th>
+            <th>Моя роль</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="week">Тиж. 1</td>
+            <td>16–20.03</td>
+            <td>Дослідження технологій. Настановча конференція, аналіз завдання.</td>
+            <td>Вивчення useState, useMemo, Fetch API, pdfMake, localeCompare</td>
+          </tr>
+          <tr>
+            <td class="week">Тиж. 2</td>
+            <td>23–27.03</td>
+            <td>Реалізація: App.jsx, handleSearch, пагінація</td>
+            <td>Управління станом, підключення до API, алгоритм сортування</td>
+          </tr>
+          <tr>
+            <td class="week">Тиж. 3</td>
+            <td>30.03–03.04</td>
+            <td>Допрацювання: useMemo, оптимізація, тестування</td>
+            <td>Мемоізація, виправлення помилок, код-рев'ю</td>
+          </tr>
+          <tr>
+            <td class="week">Тиж. 4</td>
+            <td>06–10.04</td>
+            <td>CSV / PDF модуль. Тестування повного функціоналу.</td>
+            <td>BOM-мітка CSV, pdfMake ландшафт, динамічний заголовок</td>
+          </tr>
+          <tr>
+            <td class="week">Тиж. 5–6</td>
+            <td>13–24.04</td>
+            <td>Робота з архівом деканату. Оформлення документації.</td>
+            <td>Генерація списків, сортування особових справ 2016–2025</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Фотоархів -->
+    <h3 style="font-family:'Playfair Display',serif;color:var(--navy);margin-bottom:1rem;font-size:1.2rem;">Фотоархів / Скріншоти роботи</h3>
+    <div class="screens-grid">
+      <div class="screen-placeholder">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <div class="sp-label">Скріншот 1</div>
+        <div>Додайте скрін головного екрану</div>
+      </div>
+      <div class="screen-placeholder">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <div class="sp-label">Скріншот 2</div>
+        <div>Фільтрація / результати пошуку</div>
+      </div>
+      <div class="screen-placeholder">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        <div class="sp-label">Скріншот 3</div>
+        <div>Робота з архівом деканату</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Виробнича практика 2026 · Карпатський національний університет імені Василя Стефаника</p>
+  <p style="margin-top:0.4rem;">Факультет математики та інформатики · Група КН-42 · <strong>Кучірка Любомир Іванович</strong></p>
+</footer>
+
+</body>
+</html>
